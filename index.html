@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>BusinessCardAR</title>
-    <script>
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/BusinessCardAR.loader.js";
-      var config = {
-        dataUrl: buildUrl + "/BusinessCardAR.data",
-        frameworkUrl: buildUrl + "/BusinessCardAR.framework.js",
-        codeUrl: buildUrl + "/BusinessCardAR.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "BusinessCardAR",
-        productVersion: "0.1.0",
-      };
-    </script>
-    <script src="Build/BusinessCardAR.loader.js"></script>
-  </head>
-  <body>
-    <canvas id="unity-canvas" width="960" height="600"></canvas>
-    <script>
-      createUnityInstance(document.querySelector("#unity-canvas"), config, (progress) => {
-        console.log("Loading progress: " + progress);
-      });
-    </script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <title>BusinessCardAR</title>
+  <style>
+    body { margin: 0; padding: 0; background: #222; }
+    #unity-canvas { width: 100vw; height: 100vh; display: block; }
+  </style>
+</head>
+<body>
+  <canvas id="unity-canvas"></canvas>
+  <script>
+    var buildUrl = "Build";
+    var config = {
+      dataUrl: buildUrl + "/BusinessCardAR.data",
+      frameworkUrl: buildUrl + "/BusinessCardAR.framework.js",
+      codeUrl: buildUrl + "/BusinessCardAR.wasm",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "DefaultCompany",
+      productName: "BusinessCardAR",
+      productVersion: "0.1.0"
+    };
+  </script>
+  <script src="Build/BusinessCardAR.loader.js"></script>
+  <script>
+    createUnityInstance(document.querySelector("#unity-canvas"), config, (progress) => {
+      console.log(`Loading... ${Math.round(progress * 100)}%`);
+    }).catch((message) => {
+      console.error(message);
+    });
+  </script>
+</body>
 </html>
